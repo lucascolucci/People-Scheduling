@@ -47,5 +47,5 @@ rhs <- c(rep(1, number_of_people),
 f.rhs <- rhs
 
 number_of_solutions = 5
-result <- lp ("max", f.obj, f.con, f.dir, f.rhs,all.bin=TRUE,num.bin.solns=number_of_solutions)$solution
+result <- lp("max", f.obj, f.con, f.dir, f.rhs,all.bin=TRUE,num.bin.solns=number_of_solutions)$solution
 write.csv(t(matrix(result[1:(number_of_people*number_of_projects*number_of_solutions)],nrow = number_of_projects,ncol = number_of_people*number_of_solutions)),file="Documents/Alocacao/solution.csv")
