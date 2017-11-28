@@ -60,13 +60,19 @@ route$add_handler('get', '/predict', function(request, response, keys, arg_list,
 })
 # Lastly we add the /schedule route
 route$add_handler('get', '/schedule', function(request, response, keys, ...) {
-  response$body <- lp("max", 
-                      request$query$obj, 
-                      request$query$con, 
-                      request$query$dir, 
-                      request$query$rhs, 
-                      all.bin=TRUE, 
-                      num.bin.solns=request$query$number_of_solutions)$solution
+  response$body <- c(request$query$obj,
+                     request$query$con,
+                     request$query$dir,
+                     request$query$rhs,
+                     request$query$number_of_solutions)
+    
+    # lp("max", 
+                      # request$query$obj,
+                      # request$query$con,
+                      # request$query$dir,
+                      # request$query$rhs,
+    #                   all.bin=TRUE, 
+    #                   num.bin.solns=request$query$number_of_solutions)$solution
   response$status <- 200L
   response$format(json = reqres::format_json())
   TRUE
