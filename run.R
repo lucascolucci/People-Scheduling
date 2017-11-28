@@ -60,16 +60,21 @@ route$add_handler('get', '/predict', function(request, response, keys, arg_list,
 })
 # Lastly we add the /schedule route
 route$add_handler('get', '/schedule', function(request, response, keys, ...) {
-  dir <- replace(request$query$dir,request$query$dir=="0", "=")
-  dir <- replace(request$query$dir,request$query$dir=="1", ">")
-  dir <- replace(request$query$dir,request$query$dir=="2", "<")
-  dir <- replace(request$query$dir,request$query$dir=="3", ">=")
-  dir <- replace(request$query$dir,request$query$dir=="4", "<=")
-  response$body <- c(request$query$obj,
-                     request$query$con,
+  dir <- as.numeric(unlist(strsplit(request$query$dir, "\\,")))
+  rhs <- as.numeric(unlist(strsplit(request$query$rhs, "\\,")))
+  con <- as.numeric(unlist(strsplit(request$query$con, "\\,")))
+  obj <- as.numeric(unlist(strsplit(request$query$obj, "\\,")))
+  number_of_solutions <- as.numeric(request$query$number_of_solutions)
+  dir <- replace(dir,dir=="0", "=")
+  dir <- replace(dir,dir=="1", ">")
+  dir <- replace(dir,dir=="2", "<")
+  dir <- replace(dir,dir=="3", ">=")
+  dir <- replace(dir,dir=="4", "<=")
+  response$body <- c(obj,
                      dir,
-                     request$query$rhs,
-                     request$query$number_of_solutions)
+                     rhs,
+                     number_of_solutions,
+                     con)
     
     # lp("max", 
                       # request$query$obj,
