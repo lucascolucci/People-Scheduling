@@ -59,14 +59,14 @@ route$add_handler('get', '/predict', function(request, response, keys, arg_list,
   TRUE
 })
 # Lastly we add the /schedule route
-route$add_handler('get', '/schedule', function(request, response, keys, arg_list, ...) {
+route$add_handler('get', '/schedule', function(request, response, keys, ...) {
   response$body <- lp("max", 
-                      arg_list$obj, 
-                      arg_list$con, 
-                      arg_list$dir, 
-                      arg_list$rhs, 
+                      request$query$obj, 
+                      request$query$con, 
+                      request$query$dir, 
+                      request$query$rhs, 
                       all.bin=TRUE, 
-                      num.bin.solns=arg_list$number_of_solutions)$solution
+                      num.bin.solns=request$query$number_of_solutions)$solution
   response$status <- 200L
   response$format(json = reqres::format_json())
   TRUE
