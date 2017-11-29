@@ -69,7 +69,7 @@ route$add_handler('get', '/schedule', function(request, response, keys, ...) {
 
   obj <- as.numeric(unlist(strsplit(request$query$obj, "\\,")))
   rhs <- as.numeric(unlist(strsplit(request$query$rhs, "\\,")))
-  number_of_solutions <- as.numeric(unlist(strsplit(request$query$number_of_solutions, "\\,")))
+  number_of_solutions <- as.numeric(request$query$number_of_solutions, "\\,")
   con <- as.numeric(unlist(strsplit(request$query$con, "\\,")))
   con <- matrix(con, nrow=length(dir), byrow=TRUE)
   
