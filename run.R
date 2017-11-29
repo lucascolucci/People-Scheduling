@@ -80,12 +80,12 @@ route$add_handler('get', '/schedule', function(request, response, keys, ...) {
     #                  con)
     
     lp("max",
-             request$query$obj,
-             request$query$con,
+             obj,
+             con,
              dir,
-             request$query$rhs,
+             rhs,
              all.bin=TRUE,
-             num.bin.solns=request$query$number_of_solutions)$solution
+             num.bin.solns=number_of_solutions)$solution
   response$status <- 200L
   response$format(json = reqres::format_json())
   TRUE
