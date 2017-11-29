@@ -66,20 +66,20 @@ route$add_handler('get', '/schedule', function(request, response, keys, ...) {
   dir <- replace( dir, dir==2, "<")
   dir <- replace( dir, dir==3, ">=")
   dir <- replace( dir, dir==4, "<=")
-  dir <- c(dir)
-  response$body <- c(request$query$obj,
-                     dir,
-                     request$query$rhs,
-                     request$query$number_of_solutions,
-                     request$query$con)
+
+  # response$body <- c(request$query$obj,
+  #                    dir,
+  #                    request$query$rhs,
+  #                    request$query$number_of_solutions,
+  #                    request$query$con)
     
-    # lp("max", 
-                      # request$query$obj,
-                      # request$query$con,
-                      # request$query$dir,
-                      # request$query$rhs,
-    #                   all.bin=TRUE, 
-    #                   num.bin.solns=request$query$number_of_solutions)$solution
+    lp("max",
+             request$query$obj,
+             request$query$con,
+             dir,
+             request$query$rhs,
+             all.bin=TRUE,
+             num.bin.solns=request$query$number_of_solutions)$solution
   response$status <- 200L
   response$format(json = reqres::format_json())
   TRUE
