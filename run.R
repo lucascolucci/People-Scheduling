@@ -67,11 +67,18 @@ route$add_handler('get', '/schedule', function(request, response, keys, ...) {
   dir <- replace( dir, dir==3, ">=")
   dir <- replace( dir, dir==4, "<=")
 
-  response$body <- c(request$query$obj,
+  obj <- as.numeric(unlist(strsplit(request$query$obj, "\\,")))
+  rhs <- as.numeric(unlist(strsplit(request$query$rhs, "\\,")))
+  number_of_solutions <- as.numeric(unlist(strsplit(request$query$number_of_solutions, "\\,")))
+  con <- as.numeric(unlist(strsplit(request$query$con, "\\,")))
+  con <- matrix(con, nrow=length(dir), byrow=TRUE)
+  
+  con = matrix(con, nrow=length(dir), byrow=TRUE)
+  response$body <- c(obj,
                      dir,
-                     request$query$rhs,
-                     request$query$number_of_solutions,
-                     request$query$con)
+                     rhs,
+                     number_of_solutions,
+                     con)
     
     # lp("max",
     #          request$query$obj,
