@@ -79,7 +79,7 @@ route$add_handler('get', '/schedule', function(request, response, keys, ...) {
     #                  number_of_solutions,
     #                  con)
     
-    lp("max",
+  response$body <-lp("max",
              obj,
              con,
              dir,
