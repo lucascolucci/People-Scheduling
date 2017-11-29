@@ -73,20 +73,19 @@ route$add_handler('get', '/schedule', function(request, response, keys, ...) {
   con <- as.numeric(unlist(strsplit(request$query$con, "\\,")))
   con <- matrix(con, nrow=length(dir), byrow=TRUE)
   
-  con = matrix(con, nrow=length(dir), byrow=TRUE)
-  response$body <- c(obj,
-                     dir,
-                     rhs,
-                     number_of_solutions,
-                     con)
+    # response$body <- c(obj,
+    #                  dir,
+    #                  rhs,
+    #                  number_of_solutions,
+    #                  con)
     
-    # lp("max",
-    #          request$query$obj,
-    #          request$query$con,
-    #          dir,
-    #          request$query$rhs,
-    #          all.bin=TRUE,
-    #          num.bin.solns=request$query$number_of_solutions)$solution
+    lp("max",
+             request$query$obj,
+             request$query$con,
+             dir,
+             request$query$rhs,
+             all.bin=TRUE,
+             num.bin.solns=request$query$number_of_solutions)$solution
   response$status <- 200L
   response$format(json = reqres::format_json())
   TRUE
