@@ -66,7 +66,7 @@ route$add_handler('get', '/schedule', function(request, response, keys, ...) {
   dir <- replace( dir, dir==2, "<")
   dir <- replace( dir, dir==3, ">=")
   dir <- replace( dir, dir==4, "<=")
-  
+  dir <- c(dir)
   response$body <- c(request$query$obj,
                      dir,
                      request$query$rhs,
