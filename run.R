@@ -60,7 +60,7 @@ route$add_handler('get', '/predict', function(request, response, keys, arg_list,
 })
 # Lastly we add the /schedule route
 route$add_handler('get', '/schedule', function(request, response, keys, ...) {
-  dir <- replace(dir,dir==c(0,1,2,3,4), c("=","",">","<",">=","<="))
+  dir <- replace( request$query$dir, request$query$dir==c(0,1,2,3,4), c("=","",">","<",">=","<="))
   response$body <- c(request$query$obj,
                      dir,
                      request$query$rhs,
