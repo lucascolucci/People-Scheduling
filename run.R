@@ -49,17 +49,17 @@ route$add_handler('get', '/schedulev1', function(request, response, keys, ...) {
 
 # add the /schedulev2 route
 route$add_handler('get', '/schedulev2', function(request, response, keys, ...) {
-  dir <- as.numeric(unlist(strsplit(toString(Sys.getenv("")), "\\,")))
+  dir <- as.numeric(unlist(strsplit(toString(Sys.getenv("DIR")), "\\,")))
   dir <- replace( dir, dir==0, "=")
   dir <- replace( dir, dir==1, ">")
   dir <- replace( dir, dir==2, "<")
   dir <- replace( dir, dir==3, ">=")
   dir <- replace( dir, dir==4, "<=")
   
-  obj <- as.numeric(unlist(strsplit(toString(Sys.getenv("")), "\\,")))
-  rhs <- as.numeric(unlist(strsplit(toString(Sys.getenv("")), "\\,")))
-  number_of_solutions <- as.numeric(toString(Sys.getenv("")), "\\,")
-  con <- as.numeric(unlist(strsplit(toString(Sys.getenv("")), "\\,")))
+  obj <- as.numeric(unlist(strsplit(toString(Sys.getenv("OBJ")), "\\,")))
+  rhs <- as.numeric(unlist(strsplit(toString(Sys.getenv("RHS")), "\\,")))
+  number_of_solutions <- as.numeric(toString(Sys.getenv("NOS")), "\\,")
+  con <- as.numeric(unlist(strsplit(toString(Sys.getenv("CON")), "\\,")))
   con <- matrix(con, nrow=length(dir), byrow=TRUE)
   
   response$body <-lp("max",
